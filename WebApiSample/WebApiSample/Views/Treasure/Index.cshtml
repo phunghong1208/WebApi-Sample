@@ -1,0 +1,92 @@
+﻿@{
+    ViewBag.Title = "Treasure Map";
+}
+
+<h2>Enter Pirate Treasure Map Details</h2>
+
+@using (Html.BeginForm("SaveTreasureMap", "Treasure", FormMethod.Post))
+{
+    <div>
+        <label for="N">N (rows):</label>
+        <input type="number" id="N" name="N" required />
+    </div>
+    <div>
+        <label for="M">M (columns):</label>
+        <input type="number" id="M" name="M" required />
+    </div>
+    <div>
+        <label for="P">P (max key):</label>
+        <input type="number" id="P" name="P" required />
+    </div>
+
+    <div>
+        <h3>Enter the grid (2D Matrix)</h3>
+        <div id="grid-input"></div>
+    </div>
+
+    <button type="submit">Save Map</button>
+}
+
+<button onclick="generateGrid()">Generate Grid</button>
+<p id="result"></p>
+
+<script>
+    function generateGrid() {
+        const n = document.getElementById("N").value;
+        const m = document.getElementById("M").value;
+        const gridInput = document.getElementById("grid-input");
+        gridInput.innerHTML = "";
+
+        if (n && m) {
+            for (let i = 0; i < n; i++) {
+                let row = document.createElement("div");
+                for (let j = 0; j < m; j++) {
+                    let inputField = document.createElement("input");
+                    inputField.type = "number";
+                    inputField.id = `grid-${i}-${j}`;
+                    inputField.placeholder = `(${i+1},${j+1})`;
+                    row.appendChild(inputField);
+                }
+                gridInput.appendChild(row);
+            }
+        }
+    }
+
+    function submitData() {
+        const n = document.getElementById("N").value;
+        const m = document.getElementById("M").value;
+        const p = document.getElementById("P").value;
+
+        const grid = [];
+        for (let i = 0; i < n; i++) {
+            let row = [];
+            for (let j = 0; j < m; j++) {
+                const value = document.getElementById(`grid-${i}-${j}`).value;
+                row.push(parseInt(value));
+            }
+            grid.push(row);
+        }
+
+        const payload = {
+            N: parseInt(n),
+            M: parseInt(m),
+            P: parseInt(p),
+            Grid: grid
+        };
+
+        fetch('/Treasure/CalculateFuel', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("result").innerText = `Minimum Fuel: ${data.Fuel}`;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+</script>

@@ -34,7 +34,7 @@ namespace WebApiSample.Controllers
             return Json(new { success = true, fuel });
         }
 
-        // Hàm tính toán nhiên liệu tối thiểu (Sử dụng thuật toán BFS)
+        // Hàm tính toán nhiên liệu tối thiểu
         private double CalculateMinimumFuel(TreasureMapInput input)
         {
             int n = input.N;
@@ -62,7 +62,7 @@ namespace WebApiSample.Controllers
                     }
                 }
             }
-            return (-1, -1);  // Trả về (-1, -1) nếu không tìm thấy (không bao giờ xảy ra trong bài toán này)
+            return (-1, -1);  // Trả về (-1, -1) nếu không tìm thấy
         }
 
         // Hàm BFS để tính toán nhiên liệu tối thiểu
@@ -104,7 +104,7 @@ namespace WebApiSample.Controllers
                 }
             }
 
-            return -1; // Trả về -1 nếu không tìm thấy (không xảy ra trong bài toán này)
+            return -1; // Trả về -1 nếu không tìm thấy
         }
 
         // Action lưu trữ bản đồ kho báu vào cơ sở dữ liệu

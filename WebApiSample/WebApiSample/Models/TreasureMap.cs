@@ -11,6 +11,6 @@ namespace WebApiSample.Models
         public int M { get; set; } // Số cột của bản đồ
         public int P { get; set; } // Số loại rương (kho báu)
         public string Grid { get; set; } // Chuỗi JSON đại diện cho ma trận
-        public DateTime CreatedAt { get; set; } // Thời gian tạo bản đồ
+        public DateTime CreatedAt { get; set; } // Thời gian tạo bản đồ 
     }
 }

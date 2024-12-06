@@ -2,7 +2,7 @@
     ViewBag.Title = "Treasure Map";
 }
 
-<h2>Enter Pirate Treasure Map Details</h2>
+<h2>Treasure</h2>
 
 @using (Html.BeginForm("SaveTreasureMap", "Treasure", FormMethod.Post))
 {
@@ -20,14 +20,14 @@
     </div>
 
     <div>
-        <h3>Enter the grid (2D Matrix)</h3>
+        <h3>Matrix</h3>
         <div id="grid-input"></div>
     </div>
 
     <button type="submit">Save Map</button>
 }
 
-<button onclick="generateGrid()">Generate Grid</button>
+<button onclick="generateGrid()">Grid</button>
 <p id="result"></p>
 
 <script>
